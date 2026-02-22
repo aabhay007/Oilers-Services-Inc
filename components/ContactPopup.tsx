@@ -68,7 +68,7 @@ export default function ContactPopup() {
       const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
       const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
-console.log(serviceId, templateId, publicKey);
+//console.log(serviceId, templateId, publicKey);
       // If EmailJS is not configured, use mailto fallback
     /*  if (
         serviceId === 'YOUR_SERVICE_ID' ||
