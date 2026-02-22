@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import FeedbackCarousel from '@/components/FeedbackCarousel';
 
 export const metadata: Metadata = {
   title: 'Oilers Services Inc',
@@ -59,6 +60,13 @@ export default function HomePage() {
           <p style={{ textAlign: 'center', marginTop: '1.5rem' }}>
             <strong>Commercial and Residential</strong> — All over Alberta.
           </p>
+        </div>
+      </section>
+
+      <section id="feedback" className="section feedback-section" aria-labelledby="feedback-heading">
+        <div className="container">
+          <h2 id="feedback-heading" className="section-title">What Our Clients Say</h2>
+          <FeedbackCarousel />
         </div>
       </section>
 
