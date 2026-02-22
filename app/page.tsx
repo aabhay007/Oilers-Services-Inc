@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'Home',
+  title: 'Oilers Services Inc',
   description:
     'Oilers Services Inc — New Home Builds, Renovations, General Contracting, Landscaping, Gardening, Demolition, Soil Grading & Snow Removal. Commercial & Residential across Alberta. Head office in Edmonton.',
   openGraph: {
