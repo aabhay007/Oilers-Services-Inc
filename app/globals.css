@@ -563,7 +563,7 @@ a:hover {
 .popup-form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 2px;
 }
 
 .form-group {
@@ -644,4 +644,22 @@ a:hover {
   .popup-modal h2 {
     font-size: 1.5rem;
   }
+}
+
+select#popup-service {
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+select#service {
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s;
 }

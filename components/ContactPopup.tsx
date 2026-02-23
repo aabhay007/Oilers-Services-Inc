@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
+import { SERVICES } from '@/constants/services';
 
 export default function ContactPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,16 +11,18 @@ export default function ContactPopup() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    requirements: '',
+    email: '',
+    service: '',
+    budget: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   useEffect(() => {
     const timer = setTimeout(() => {
       const hasSeenPopup = localStorage.getItem('contact-popup-seen');
-     // if (!hasSeenPopup) {
-        setIsOpen(true);
-   //   }
+      // if (!hasSeenPopup) {
+      setIsOpen(true);
+      // }
     }, 10000); // 10 seconds
 
     return () => clearTimeout(timer);
@@ -31,7 +34,7 @@ export default function ContactPopup() {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -46,10 +49,16 @@ export default function ContactPopup() {
       newErrors.name = 'Name is required';
     }
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
+      newErrors.phone = 'Number is required';
     }
-    if (!formData.requirements.trim()) {
-      newErrors.requirements = 'Your requirements are required';
+    if (!formData.email.trim()) {
+      newErrors.email = 'E-mail is required';
+    }
+    if (!formData.service.trim()) {
+      newErrors.service = 'Please select a service';
+    }
+    if (!formData.budget.trim()) {
+      newErrors.budget = 'Your budget is required';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -62,22 +71,12 @@ export default function ContactPopup() {
     setIsSubmitting(true);
 
     try {
-      // EmailJS configuration
-      // Get these from https://www.emailjs.com/
-      // Replace with your EmailJS service ID, template ID, and public key
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
-//console.log(serviceId, templateId, publicKey);
-      // If EmailJS is not configured, use mailto fallback
-    /*  if (
-        serviceId === 'YOUR_SERVICE_ID' ||
-        templateId === 'YOUR_TEMPLATE_ID' ||
-        publicKey === 'YOUR_PUBLIC_KEY'
-      ) {
-        throw new Error('EmailJS not configured');
-      }
-        */
+      const serviceId =
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+      const templateId =
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+      const publicKey =
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
 
       await emailjs.send(
         serviceId,
@@ -85,9 +84,11 @@ export default function ContactPopup() {
         {
           from_name: formData.name,
           from_phone: formData.phone,
-          message: formData.requirements,
+          from_email: formData.email,
+          service: formData.service,
+          budget: formData.budget,
           to_email: 'oilersservicesinc@gmail.com',
-          subject: 'New Contact Form Submission - Oilers Services Inc',
+          subject: 'New Appointment Request - Oilers Services Inc',
         },
         publicKey
       );
@@ -97,9 +98,6 @@ export default function ContactPopup() {
         handleClose();
       }, 2000);
     } catch (error) {
-      // Fallback: use mailto if EmailJS fails or is not configured
-    //  const mailtoLink = `mailto:oilersservicesinc@gmail.com?subject=Contact Form Submission - Oilers Services Inc&body=Name: ${encodeURIComponent(formData.name)}%0APhone: ${encodeURIComponent(formData.phone)}%0ARequirements: ${encodeURIComponent(formData.requirements)}`;
-     // window.location.href = mailtoLink;
       setIsSubmitted(true);
       setTimeout(() => {
         handleClose();
@@ -129,9 +127,10 @@ export default function ContactPopup() {
           </div>
         ) : (
           <>
-            <h2 id="popup-title">Get a Free Quote</h2>
+            <h2 id="popup-title">Book an Appointment</h2>
             <p className="popup-subtitle">
-              Tell us about your project and we&apos;ll contact you shortly.
+              Share your details and preferred service, and we&apos;ll contact
+              you shortly.
             </p>
             <form onSubmit={handleSubmit} className="popup-form">
               <div className="form-group">
@@ -153,7 +152,7 @@ export default function ContactPopup() {
               </div>
               <div className="form-group">
                 <label htmlFor="popup-phone">
-                  Phone Number <span className="required">*</span>
+                  Number <span className="required">*</span>
                 </label>
                 <input
                   type="tel"
@@ -169,20 +168,60 @@ export default function ContactPopup() {
                 )}
               </div>
               <div className="form-group">
-                <label htmlFor="popup-requirements">
-                  Your Requirements <span className="required">*</span>
+                <label htmlFor="popup-email">
+                  E-Mail <span className="required">*</span>
                 </label>
-                <textarea
-                  id="popup-requirements"
-                  name="requirements"
-                  value={formData.requirements}
+                <input
+                  type="email"
+                  id="popup-email"
+                  name="email"
+                  value={formData.email}
                   onChange={handleChange}
-                  rows={4}
                   required
-                  className={errors.requirements ? 'error' : ''}
+                  className={errors.email ? 'error' : ''}
                 />
-                {errors.requirements && (
-                  <span className="error-message">{errors.requirements}</span>
+                {errors.email && (
+                  <span className="error-message">{errors.email}</span>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="popup-service">
+                  Select service <span className="required">*</span>
+                </label>
+                <select
+                  id="popup-service"
+                  name="service"
+                  value={formData.service}
+                  onChange={handleChange}
+                  required
+                  className={errors.service ? 'error' : ''}
+                >
+                  <option value="">Select a service</option>
+                  {SERVICES.map((service) => (
+                    <option key={service.title} value={service.title}>
+                      {service.title}
+                    </option>
+                  ))}
+                </select>
+                {errors.service && (
+                  <span className="error-message">{errors.service}</span>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="popup-budget">
+                  Your Budget <span className="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="popup-budget"
+                  name="budget"
+                  value={formData.budget}
+                  onChange={handleChange}
+                  required
+                  className={errors.budget ? 'error' : ''}
+                />
+                {errors.budget && (
+                  <span className="error-message">{errors.budget}</span>
                 )}
               </div>
               <button

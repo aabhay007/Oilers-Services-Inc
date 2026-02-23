@@ -37,6 +37,7 @@ export default function Header() {
         <nav className="nav" aria-label="Main navigation">
           <ul className="nav-list">
             <li><Link style={{ color: '#295959' }} href="/#services">Services</Link></li>
+            <li><Link style={{ color: '#295959' }} href="/request-appointment">Book Appointment</Link></li>
             <li><Link style={{ color: '#295959' }} href="/#contact">Contact</Link></li>
           </ul>
         </nav>
