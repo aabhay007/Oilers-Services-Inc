@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Metadata } from 'next';
 import emailjs from '@emailjs/browser';
 import { SERVICES } from '@/constants/services';
@@ -21,6 +21,13 @@ export default function RequestAppointmentPage() {
     service: '',
     budget: '',
   });
+
+  useEffect(() => {
+    setTimeout(() => {
+      localStorage.setItem('request-appointment-seen', 'true');
+    }, 1000);
+  }, []);
+
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChange = (

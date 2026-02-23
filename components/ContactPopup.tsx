@@ -19,10 +19,10 @@ export default function ContactPopup() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const hasSeenPopup = localStorage.getItem('contact-popup-seen');
-      // if (!hasSeenPopup) {
+      const hasSeenPopup = localStorage.getItem('request-appointment-seen');
+       if (!hasSeenPopup) {
       setIsOpen(true);
-      // }
+       }
     }, 10000); // 10 seconds
 
     return () => clearTimeout(timer);

@@ -1,9 +1,13 @@
 'use client';
+import { useEffect } from 'react';
 
 const WHATSAPP_NUMBER = '15879361629';
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 export default function WhatsAppFloating() {
+  useEffect(() => {
+    localStorage.removeItem('request-appointment-seen');
+  }, []);
   return (
     <a
       href={WHATSAPP_URL}
