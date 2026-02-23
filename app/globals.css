@@ -91,7 +91,7 @@ a:hover {
 
 .logo-img {
   height: auto;
-  max-height: 56px;
+  max-height: 86px;
   width: auto;
   max-width: 100%;
   object-fit: contain;
@@ -301,8 +301,9 @@ a:hover {
 .service-card p {
   margin: 0;
   padding: 0 1.25rem 1.25rem;
-  font-size: 0.95rem;
+  font-size: 13px;
   color: #444;
+  font-style: oblique;
 }
 
 /* Feedback / Testimonials carousel */
