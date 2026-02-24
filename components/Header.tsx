@@ -36,9 +36,9 @@ export default function Header() {
         </Link>
         <nav className="nav" aria-label="Main navigation">
           <ul className="nav-list">
-            <li><Link style={{ color: '#295959' }} href="/#services">Services</Link></li>
-            <li><Link style={{ color: '#295959' }} href="/request-appointment">Book Appointment</Link></li>
-            <li><Link style={{ color: '#295959' }} href="/#contact">Contact</Link></li>
+            <li><Link style={{ color: '#2e4866' }} href="/#services">Services</Link></li>
+            <li><Link style={{ color: '#2e4866' }} href="/request-appointment">Book Appointment</Link></li>
+            <li><Link style={{ color: '#2e4866' }} href="/#contact">Contact</Link></li>
           </ul>
         </nav>
       </div>

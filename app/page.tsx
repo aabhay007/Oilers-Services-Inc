@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import FeedbackCarousel from '@/components/FeedbackCarousel';
 import { SERVICES } from '@/constants/services';
 
@@ -84,6 +85,11 @@ export default function HomePage() {
                 Edmonton, Alberta
               </p>
             </div>
+          </div>
+          <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+            <Link href="/request-appointment" className="btn">
+              Request Appointment
+            </Link>
           </div>
         </div>
       </section>

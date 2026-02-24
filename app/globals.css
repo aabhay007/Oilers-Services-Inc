@@ -1,11 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap");
+
 :root {
-  --oilers-teal: #2a5a5a;
-  --oilers-teal-dark: #1e4242;
-  --oilers-teal-light: #3d7a7a;
+  --oilers-teal: #2e4866;
+  --oilers-teal-dark: #374759;
+  --oilers-teal-light: #2b4766;
   --oilers-tagline: #cccccc;
   --oilers-white: #f5f5f5;
   --oilers-black: #0a0a0a;
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans:
+    "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  --font-heading: "Playfair Display", "Times New Roman", serif;
 }
 
 *,
@@ -26,10 +31,14 @@ body {
   line-height: 1.6;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   color: var(--oilers-teal-dark);
   font-weight: 700;
   line-height: 1.2;
+  font-family: var(--font-heading);
 }
 
 a {
@@ -69,7 +78,9 @@ a:hover {
   top: 0;
   z-index: 100;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: padding 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    padding 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .header--compact {
@@ -131,6 +142,7 @@ a:hover {
 .nav-list a {
   color: var(--oilers-tagline);
   font-weight: 600;
+  font-size: 1.16rem;
   text-decoration: none;
 }
 
@@ -141,7 +153,7 @@ a:hover {
 
 /* Sections */
 .section {
-  padding: 4rem 0;
+  padding: 2rem 0;
 }
 
 .section-alt {
@@ -232,7 +244,11 @@ a:hover {
 .hero {
   padding: 4rem 0 5rem;
   text-align: center;
-  background: linear-gradient(180deg, var(--oilers-teal-dark) 0%, var(--oilers-teal) 50%, var(--oilers-teal-dark) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--oilers-teal-light) 0%,
+    var(--oilers-teal) 45%
+  );
   color: #fff;
 }
 
@@ -270,7 +286,9 @@ a:hover {
   overflow: hidden;
   padding: 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: box-shadow 0.2s, border-color 0.2s;
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s;
 }
 
 .service-card:hover {
@@ -306,37 +324,41 @@ a:hover {
   font-style: oblique;
 }
 
-/* Feedback / Testimonials carousel */
+/* Feedback Section Background */
 .feedback-section {
   background: linear-gradient(180deg, var(--oilers-white) 0%, #e8f0f0 100%);
 }
 
+/* Wrapper */
 .feedback-carousel-wrap {
-  overflow: hidden;
-  margin: 0 -1.5rem;
-  padding: 0.5rem 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
 }
 
+.feedback-carousel-wrap::-webkit-scrollbar {
+  height: 6px; /* horizontal scrollbar height */
+}
+
+.feedback-carousel-wrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.feedback-carousel-wrap::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+}
+
+/* Track */
 .feedback-carousel-track {
   display: flex;
-  gap: 1.5rem;
+  gap: 20px;
   width: max-content;
-  animation: feedbackScroll 45s linear infinite;
 }
 
-.feedback-carousel-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes feedbackScroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
+/* Card */
 .feedback-card {
   flex: 0 0 min(340px, 85vw);
   max-width: 340px;
@@ -352,6 +374,7 @@ a:hover {
   box-shadow: 0 6px 20px rgba(42, 90, 90, 0.1);
 }
 
+/* Stars */
 .feedback-stars {
   display: flex;
   gap: 2px;
@@ -364,6 +387,7 @@ a:hover {
   line-height: 1;
 }
 
+/* Text */
 .feedback-text {
   margin: 0 0 1rem;
   font-size: 0.95rem;
@@ -371,6 +395,7 @@ a:hover {
   color: #333;
 }
 
+/* Meta */
 .feedback-meta {
   display: flex;
   flex-direction: column;
@@ -388,6 +413,7 @@ a:hover {
   color: #666;
 }
 
+/* Mobile */
 @media (max-width: 640px) {
   .feedback-card {
     flex: 0 0 min(300px, 88vw);
@@ -464,7 +490,9 @@ a:hover {
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(37, 211, 102, 0.5);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .whatsapp-float:hover {
@@ -540,7 +568,9 @@ a:hover {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: background 0.2s, color 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s;
 }
 
 .popup-close:hover {
@@ -640,7 +670,7 @@ a:hover {
   .popup-modal {
     padding: 1.5rem;
   }
-  
+
   .popup-modal h2 {
     font-size: 1.5rem;
   }
