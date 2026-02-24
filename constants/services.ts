@@ -30,7 +30,7 @@ export const SERVICES = [
     title: 'Gardening',
     description:
       'We provide routine and seasonal gardening services to keep your property green, healthy, and visually appealing.',
-    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80',
+    image: '/images/garden-img.jpeg',
   },
   {
     title: 'Demolition',

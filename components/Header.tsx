@@ -8,6 +8,7 @@ const SCROLL_THRESHOLD = 80;
 
 export default function Header() {
   const [compact, setCompact] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -24,21 +25,68 @@ export default function Header() {
       role="banner"
     >
       <div className="container header-inner">
-        <Link href="/" className="logo-link" aria-label="Oilers Services Inc - Home">
-          <Image
-            src="/images/logo/oilersservices_logo.png"
-            alt="Oilers Services Inc - Invest in your future"
-            width={260}
-            height={96}
-            priority
-            className="logo-img"
-          />
-        </Link>
-        <nav className="nav" aria-label="Main navigation">
+        <div className="header-brand">
+          <Link
+            href="/"
+            className="logo-link"
+            aria-label="Oilers Services Inc - Home"
+            onClick={() => setMenuOpen(false)}
+          >
+            <Image
+              src="/images/logo/oilersservices_logo.png"
+              alt="Oilers Services Inc - Invest in your future"
+              width={260}
+              height={96}
+              priority
+              className="logo-img"
+            />
+          </Link>
+        </div>
+
+        <button
+          type="button"
+          className="nav-toggle"
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <nav
+          className={`nav ${menuOpen ? 'nav--open' : ''}`}
+          aria-label="Main navigation"
+        >
           <ul className="nav-list">
-            <li><Link style={{ color: '#2e4866' }} href="/#services">Services</Link></li>
-            <li><Link style={{ color: '#2e4866' }} href="/request-appointment">Book Appointment</Link></li>
-            <li><Link style={{ color: '#2e4866' }} href="/#contact">Contact</Link></li>
+            <li>
+              <Link
+                style={{ color: '#2e4866' }}
+                href="/#services"
+                onClick={() => setMenuOpen(false)}
+              >
+                Services
+              </Link>
+            </li>
+            <li>
+              <Link
+                style={{ color: '#2e4866' }}
+                href="/request-appointment"
+                onClick={() => setMenuOpen(false)}
+              >
+                Book Appointment
+              </Link>
+            </li>
+            <li>
+              <Link
+                style={{ color: '#2e4866' }}
+                href="/#contact"
+                onClick={() => setMenuOpen(false)}
+              >
+                Contact
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
