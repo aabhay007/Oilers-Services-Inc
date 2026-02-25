@@ -94,7 +94,7 @@ export default function Header() {
                 Contact
               </Link>
             </li>
-            <li><Link style={{ color: '#2e4866' }} href="/blog">Blog</Link></li>
+            {/* <li><Link style={{ color: '#2e4866' }} href="/blog">Blog</Link></li> */}
           </ul>
         </nav>
       </div>
