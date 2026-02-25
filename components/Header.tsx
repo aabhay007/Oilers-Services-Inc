@@ -5,16 +5,23 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const SCROLL_THRESHOLD = 80;
-
+const COLLAPSE_THRESHOLD = 100;
+const EXPAND_THRESHOLD = 10;
 export default function Header() {
   const [compact, setCompact] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
-      setCompact(window.scrollY > SCROLL_THRESHOLD);
+      const scrollY = window.scrollY;
+  
+      setCompact((prev) => {
+        if (!prev && scrollY > COLLAPSE_THRESHOLD) return true;
+        if (prev && scrollY < EXPAND_THRESHOLD) return false;
+        return prev;
+      });
     };
-    onScroll();
+  
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
