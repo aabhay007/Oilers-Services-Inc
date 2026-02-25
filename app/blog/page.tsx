@@ -3,20 +3,8 @@ import blogs from '@/constants/blogs.json';
 
 type BlogPost = (typeof blogs)[number];
 
-function formatDate(dateString: string) {
-  const date = new Date(dateString);
-  if (Number.isNaN(date.getTime())) return dateString;
-  return date.toLocaleDateString('en-CA', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
-
 export default function BlogIndexPage() {
-  const sortedPosts: BlogPost[] = [...blogs].sort((a, b) =>
-    b.date.localeCompare(a.date)
-  );
+  const sortedPosts: BlogPost[] = [...blogs];
 
   return (
     <section className="section section-alt" aria-labelledby="blog-heading">
@@ -43,7 +31,6 @@ export default function BlogIndexPage() {
           <div className="blog-grid">
             {sortedPosts.map((post) => (
               <article key={post.slug} className="blog-card">
-                <p className="blog-date">{formatDate(post.date)}</p>
                 <h2 className="blog-title">
                   <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                 </h2>
