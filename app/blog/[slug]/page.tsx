@@ -9,16 +9,6 @@ function getPost(slug: string): BlogPost | undefined {
   return blogs.find((post) => post.slug === slug);
 }
 
-function formatDate(dateString: string) {
-  const date = new Date(dateString);
-  if (Number.isNaN(date.getTime())) return dateString;
-  return date.toLocaleDateString('en-CA', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
-
 export function generateStaticParams() {
   return blogs.map((post) => ({ slug: post.slug }));
 }
@@ -52,7 +42,6 @@ export default function BlogPostPage({
     notFound();
   }
 
-  const publishedDate = formatDate(post.date);
   const paragraphs = post.content.split('\n\n');
 
   return (
@@ -64,8 +53,6 @@ export default function BlogPostPage({
         <h1 id="blog-post-heading" className="blog-post-title">
           {post.title}
         </h1>
-        <p className="blog-post-date">{publishedDate}</p>
-
         <div className="blog-post-body">
           {paragraphs.map((para, index) => (
             <p key={index}>{para}</p>
