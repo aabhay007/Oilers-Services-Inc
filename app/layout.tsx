@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     follow: true,
   },
   alternates: { canonical: '/' },
+  verification: {
+    google: "frevvI2SQ1O5En_CUhWv-jqPN7DMRQdM-zGlcRUWibg",
+  },
 };
 
 const jsonLd = {
