@@ -1,16 +1,18 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import FeedbackCarousel from '@/components/FeedbackCarousel';
-import { SERVICES } from '@/constants/services';
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import FeedbackCarousel from "@/components/FeedbackCarousel";
+import { SERVICES } from "@/constants/services";
+import { slugify } from "@/lib/slugify";
 
 export const metadata: Metadata = {
-  title: 'Oilers Services Inc',
+  title: "Oilers Services Inc",
   description:
-    'Oilers Services Inc — New Home Builds, Renovations, General Contracting, Landscaping, Gardening, Demolition, Soil Grading & Snow Removal. Commercial & Residential across Alberta. Head office in Edmonton.',
+    "Oilers Services Inc — New Home Builds, Renovations, General Contracting, Landscaping, Gardening, Demolition, Soil Grading & Snow Removal. Commercial & Residential across Alberta. Head office in Edmonton.",
   openGraph: {
-    title: 'Oilers Services Inc | General Contracting & Renovations | Alberta',
-    description: 'New Home Builds, Renovations, Landscaping, Demolition, Snow Removal. Commercial & Residential across Alberta.',
+    title: "Oilers Services Inc | General Contracting & Renovations | Alberta",
+    description:
+      "New Home Builds, Renovations, Landscaping, Demolition, Snow Removal. Commercial & Residential across Alberta.",
   },
 };
 
@@ -22,19 +24,30 @@ export default function HomePage() {
           <h1 id="hero-heading">Oilers Services Inc</h1>
           <p className="tagline">Invest in your future</p>
           <p className="sub">
-          Oilers Services Inc provides professional construction, renovation, landscaping, demolition, grading, and 
-          snow removal services for <b>residential and commercial</b>  clients. We are committed to quality workmanship, safety,
-          and customer satisfaction.
+            Oilers Services Inc provides professional construction, renovation,
+            landscaping, demolition, grading, and snow removal services for{" "}
+            <b>residential and commercial</b> clients. We are committed to
+            quality workmanship, safety, and customer satisfaction.
           </p>
         </div>
       </section>
 
-      <section id="services" className="section section-alt" aria-labelledby="services-heading">
+      <section
+        id="services"
+        className="section section-alt"
+        aria-labelledby="services-heading"
+      >
         <div className="container">
-          <h2 id="services-heading" className="section-title">Services We Provide</h2>
+          <h2 id="services-heading" className="section-title">
+            Services We Provide
+          </h2>
           <div className="services-grid" role="list">
             {SERVICES.map((service) => (
-              <article key={service.title} className="service-card" role="listitem">
+              <article
+                key={service.title}
+                className="service-card"
+                role="listitem"
+              >
                 <div className="service-card-image">
                   <Image
                     src={service.image}
@@ -45,31 +58,49 @@ export default function HomePage() {
                     className="service-img"
                   />
                 </div>
-                <h3>{service.title}</h3>
+                <h3>
+                  <Link href={`/services/${slugify(service.title)}`}>
+                    {service.title}
+                  </Link>
+                </h3>
                 <p>{service.description}</p>
               </article>
             ))}
           </div>
-          <p style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+          <p style={{ textAlign: "center", marginTop: "1.5rem" }}>
             <strong>Commercial and Residential</strong> — All over Alberta.
           </p>
         </div>
       </section>
 
-      <section id="feedback" className="section feedback-section" aria-labelledby="feedback-heading">
+      <section
+        id="feedback"
+        className="section feedback-section"
+        aria-labelledby="feedback-heading"
+      >
         <div className="container">
-          <h2 id="feedback-heading" className="section-title">What Our Clients Say</h2>
+          <h2 id="feedback-heading" className="section-title">
+            What Our Clients Say
+          </h2>
           <FeedbackCarousel />
         </div>
       </section>
 
-      <section id="contact" className="section" aria-labelledby="contact-heading">
+      <section
+        id="contact"
+        className="section"
+        aria-labelledby="contact-heading"
+      >
         <div className="container">
-          <h2 id="contact-heading" className="section-title">Contact Us</h2>
+          <h2 id="contact-heading" className="section-title">
+            Contact Us
+          </h2>
           <div className="contact-box">
             <div className="contact-block">
               <h3>Email</h3>
-              <a href="mailto:oilersservicesinc@gmail.com">oilersservicesinc@gmail.com</a>
+              <a href="mailto:oilersservicesinc@gmail.com">
+                oilersservicesinc@gmail.com
+              </a>
               <a href="mailto:oilers.secur@gmail.com">oilers.secur@gmail.com</a>
             </div>
             <div className="contact-block">
@@ -80,13 +111,15 @@ export default function HomePage() {
             <div className="contact-block">
               <h3>Head Office</h3>
               <p className="location-address">
-                <strong>Oilers Services Inc</strong><br />
-                1441 156 St SW<br />
+                <strong>Oilers Services Inc</strong>
+                <br />
+                1441 156 St SW
+                <br />
                 Edmonton, Alberta
               </p>
             </div>
           </div>
-          <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
+          <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
             <Link href="/request-appointment" className="btn">
               Request Appointment
             </Link>
