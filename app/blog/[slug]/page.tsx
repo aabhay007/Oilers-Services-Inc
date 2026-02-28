@@ -1,7 +1,7 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import blogs from '@/constants/blogs.json';
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import blogs from "@/constants/blogs.json";
 
 type BlogPost = (typeof blogs)[number];
 
@@ -21,7 +21,7 @@ export function generateMetadata({
   const post = getPost(params.slug);
   if (!post) {
     return {
-      title: 'Blog post not found',
+      title: "Blog post not found",
     };
   }
 
@@ -31,18 +31,12 @@ export function generateMetadata({
   };
 }
 
-export default function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = getPost(params.slug);
 
   if (!post) {
     notFound();
   }
-
-  const paragraphs = post.content.split('\n\n');
 
   return (
     <section className="section" aria-labelledby="blog-post-heading">
@@ -53,13 +47,11 @@ export default function BlogPostPage({
         <h1 id="blog-post-heading" className="blog-post-title">
           {post.title}
         </h1>
-        <div className="blog-post-body">
-          {paragraphs.map((para, index) => (
-            <p key={index}>{para}</p>
-          ))}
-        </div>
+        <div
+          className="blog-post-body"
+          dangerouslySetInnerHTML={{ __html: post.content }}
+        />
       </div>
     </section>
   );
 }
-
